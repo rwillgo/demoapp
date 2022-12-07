@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var config = require("dotenv").config();
 var mongoose = require("mongoose");
-
+var cors = require('cors');
+var postsRouter = require('./routes/posts');
 var dbConnString = encodeURI(process.env.DB_CONN_STRING);
 
 mongoose
@@ -17,26 +18,19 @@ mongoose
     console.log("Error connecting to database - ", error.message);
   });
 
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var notesRouter = require('./routes/notes');
-
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+app.use(cors({origin: true, credentials: true}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/notes', notesRouter);
+app.use('/posts', postsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
