@@ -21,7 +21,7 @@ const postCreateRequest = (state, action) => ({
 const postCreateSuccess = (state, action) => ({
   ...state,
   createRequestType: action.type,
-  post: action.payload.posts,
+  post: action.payload.post,
   createErrorMessage: '',
 });
 

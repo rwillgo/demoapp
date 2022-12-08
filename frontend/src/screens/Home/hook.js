@@ -1,6 +1,7 @@
 import {useEffect, useState, useRef} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Types from '../../store/actions/actionTypes';
+import NavigationService from '../../navigation/NavigationService';
 
 const useHomeScreen = props => {
   const isInitialMount = useRef(true);
@@ -45,10 +46,15 @@ const useHomeScreen = props => {
     getHome();
   };
 
+  const onNewPostPressHandler = () => {
+    NavigationService.navigate('NewPost');
+  };
+
   return {
     isFetching,
     data,
     onRefreshPressHandler,
+    onNewPostPressHandler,
   };
 };
 

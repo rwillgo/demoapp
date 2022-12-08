@@ -12,7 +12,8 @@ import useHomeScreen from './hook';
 import styles from './styles';
 
 function HomeScreen(props) {
-  const {isFetching, data, onRefreshPressHandler} = useHomeScreen(props);
+  const {isFetching, data, onRefreshPressHandler, onNewPostPressHandler} =
+    useHomeScreen(props);
 
   const renderEmpty = () => {
     return (
@@ -36,7 +37,7 @@ function HomeScreen(props) {
         <TouchableOpacity onPress={onRefreshPressHandler}>
           <Text style={styles.buttonLabel}>Refresh</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onNewPostPressHandler}>
           <Text style={styles.buttonLabel}>New Post</Text>
         </TouchableOpacity>
       </View>
